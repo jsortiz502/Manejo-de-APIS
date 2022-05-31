@@ -12,8 +12,13 @@
 
 <body>
     <div id="app">
-        <!-- Favorites -->
+        <!-- Favoritos -->
         <div class="favorites">
+            <div class="favorite" v-for="lista in allFavoritos">
+                <a href="">
+                    <img v-bind:src="lista.avatar_url" :alt="lista.login" class="favorite__avatar">
+                </a>
+            </div>
         </div>
 
         <!-- Content -->
@@ -27,16 +32,21 @@
                 <input type="submit" class="search__submit" value="Buscar">
             </form>
 
-            <!-- Result -->
-            <div class="result" v-if="resultado">
+            <!-- Resultado -->
+            <div class="result" v-if="resultado">               
                 <h2 class="result__name">{{resultado.name}}</h2>
-                <img v-bind:src="resultado.avatar_url" class="result__avatar" alt="">
-                
-                <p class="result__bio">{{resultado.bio}}
+                <img v-bind:src="resultado.avatar_url" class="result__avatar" alt="">              
+                <p class="result__bio">{{resultado.bio}}                 
                     <br>
                     <center><a :href="resultado.html_url" class="result__blog" target="_blank">Perfil del usuario</a></center>
+                    <br>
+                    <center><a href="" class="result__toggle-favorite" @click.prevent="addFavorito"><img src="icono estrella.png" height="20" width="20">Añadir favoritos</a></center>
+                    <br>
+                    <center><a href="" v-if="favoritos.has(resultado.id)" class="result__remove" @click.prevent="removeFavorito"><img src="eliminar.png" height="20" width="20">Eliminar favoritos</a></center>
+                    
+                    <!-- El @ remplaza las directivvas con los 2 puntos -->
                 </p>
-                
+
             </div>
 
             <b v-else>Esperando el resultado.....</b>

@@ -6,8 +6,18 @@ const app = Vue.createApp({
       return {
         busqueda: null,
         resultado: null,//un vacio o no hay nada
-         fail: null
-      }
+        fail: null,
+        favoritos: new Map()//aqui se guarda o almacenara las busquedas favoritas o que seran agregadas
+      }   
+    },
+    computed: {
+        esFavorito(){
+          return this.favoritos.has(this.resultado.id)
+        },
+
+        allFavoritos(){
+          return Array.from(this.favoritos.values())
+        }
     },
     methods: {
         async Buscar(){
@@ -20,7 +30,6 @@ const app = Vue.createApp({
             this.resultado = data
             this.fail = null
             
-
           } catch (error) {
             this.fail = error
             this.resultado = false
@@ -31,6 +40,22 @@ const app = Vue.createApp({
             
           }
             
-        }
-    },
+        },
+      addFavorito(){
+        //la clave de este map es el 'id' y su valor es el 'resultado'
+        this.favoritos.set(this.resultado.id, this.resultado)
+        this.updateFavorito()
+      },
+      //Aqui se eliminan los que se hayan añadido como favoritos
+      removeFavorito(){
+        this.favoritos.delete(this.resultado.id)
+        this.updateFavorito()
+      },
+      //guardar en cache los usuarios añadidos como favoritos
+      //de manera persistente
+      updateFavorito(){
+        window.localStorage.setItem('favoritos',JSON.stringify(this.allFavoritos))
+      }
+
+    }
   })

@@ -70,13 +70,28 @@ body {
 }
 
 .result__toggle-favorite {
-  position: absolute;
+  
   top: 0.3rem;
   right: 0.3rem;
   border: none;
+  left: 0.5rem;
   color: white;
   text-decoration: none;
   padding: 0.4rem;
+  font-size: 15px;
+}
+.result__remove{
+  top: 0.3rem;
+  right: 0.3rem;
+  border: none;
+  left: 0.5rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.4rem;
+  font-size: 15px;
+}
+.result__name:hover{
+  color: rgb(68, 0, 255);
 }
 
 .result__name {
@@ -97,6 +112,13 @@ body {
   margin-bottom: 1px;
   border-radius: 3rem;
   text-align: center;
+  transition: all 1s;
+}
+.result__avatar:hover{
+  margin-top: 15px;
+  margin-bottom: 2px;
+  margin-left: 250px;
+  max-width: 9rem;
 }
 .result{
   margin: auto;
@@ -118,6 +140,9 @@ body {
   font-family: serif;
   color: rgb(255, 255, 255);
   text-decoration: underline;
+}
+.result__blog:hover{
+  color: rgb(68, 0, 255);
 }
 
 .result__error {
